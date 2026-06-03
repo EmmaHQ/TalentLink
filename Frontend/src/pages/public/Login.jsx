@@ -8,6 +8,8 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth(); // 🔥 IMPORTANTE
 
+  const API_URL = "https://talentlink-1-bbse.onrender.com";
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -15,7 +17,7 @@ export default function Login() {
     const password = e.target[1].value;
 
     try {
-      const res = await axios.post("http://localhost:8001/api/auth/login", {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
@@ -24,8 +26,7 @@ export default function Login() {
 
       localStorage.setItem("token", token);
 
-      // 🔥 pedir usuario real al backend
-      const userRes = await axios.get("http://localhost:8001/api/auth/me", {
+      const userRes = await axios.get(`${API_URL}/api/auth/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,11 +34,11 @@ export default function Login() {
 
       const user = userRes.data;
 
-      login(token, user); // global state
+      login(token, user);
 
       navigate("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       alert("Login fallido");
     }
   };
@@ -50,17 +51,16 @@ export default function Login() {
     const password = e.target[2].value;
 
     try {
-      await axios.post("http://localhost:8001/api/auth/register", {
+      await axios.post(`${API_URL}/api/auth/register`, {
         name,
         email,
         password,
       });
 
       alert("Usuario creado correctamente");
-
       setFlipped(false);
     } catch (error) {
-      console.log("Error register:", error.response?.data || error.message);
+      console.error(error);
       alert("Error creando usuario");
     }
   };
@@ -94,7 +94,11 @@ export default function Login() {
             bg-yellow-400 rounded-xl
             transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
           "
-          style={{ transform: flipped ? "translateX(calc(100% + 8px))" : "translateX(0)" }}
+          style={{
+            transform: flipped
+              ? "translateX(calc(100% + 8px))"
+              : "translateX(0)",
+          }}
         />
 
         <button
