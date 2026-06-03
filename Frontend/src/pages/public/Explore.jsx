@@ -4,7 +4,7 @@ import axios from "axios";
 import Order from "../../components/MakeOrder";
 import SkillModal from "../../components/SkillModal";
 
-const API = "http://localhost:8001/api";
+const API = "https://talentlink-1-bbse.onrender.com/api";
 
 async function fetchRandomSkillsPerUser() {
   const usersRes = await axios.get(`${API}/users`);

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditSkillModal from "../../components/EditSkillModal";
 
-const API = "http://localhost:8001/api";
+const API = "https://talentlink-1-bbse.onrender.com/api";
 
 function SkillModal({ skill, user, onClose }) {
   if (!skill || !user) return null;

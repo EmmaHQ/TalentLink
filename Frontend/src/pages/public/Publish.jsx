@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 
-const API = "http://localhost:8001/api";
+const API = "https://talentlink-1-bbse.onrender.com/api";
 
 const categories = ["Diseño", "Programación", "Marketing", "Data", "IA"];
 const levels = ["Básico", "Intermedio", "Avanzado"];

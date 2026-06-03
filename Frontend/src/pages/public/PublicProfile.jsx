@@ -4,7 +4,7 @@ import axios from "axios";
 import Order from "../../components/MakeOrder";
 import SkillModal from "../../components/SkillModal";
 
-const API = "http://localhost:8001/api";
+const API = "https://talentlink-1-bbse.onrender.com/api";
 
 export default function PublicProfile() {
   const { userId } = useParams();
