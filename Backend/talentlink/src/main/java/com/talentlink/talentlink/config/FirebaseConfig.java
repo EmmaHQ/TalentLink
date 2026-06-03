@@ -19,9 +19,14 @@ public class FirebaseConfig {
 
             if (FirebaseApp.getApps().isEmpty()) {
 
-                InputStream serviceAccount =
-                        getClass().getClassLoader()
-                                .getResourceAsStream("firebase/firebase-key.json");
+                String firebaseJson = System.getenv("FIREBASE_PRIVATE_KEY_JSON");
+
+                if (firebaseJson == null || firebaseJson.isEmpty()) {
+                    throw new RuntimeException("FIREBASE_PRIVATE_KEY_JSON no está configurada");
+                }
+
+                InputStream serviceAccount = new java.io.ByteArrayInputStream(
+                        firebaseJson.getBytes(java.nio.charset.StandardCharsets.UTF_8));
 
                 if (serviceAccount == null) {
                     throw new RuntimeException("firebase-key.json no encontrado");
