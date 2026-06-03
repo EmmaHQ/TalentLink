@@ -32,7 +32,8 @@ public class UserService {
         }
         try {
             User user = repository.findById(id);
-            if (user == null) throw new RuntimeException("User not found with id: " + id);
+            if (user == null)
+                throw new RuntimeException("User not found with id: " + id);
             return user;
         } catch (Exception e) {
             throw new RuntimeException("Error fetching user from Firebase", e);
@@ -51,7 +52,8 @@ public class UserService {
     public User updateUser(String id, Map<String, String> updates) {
         try {
             User existing = repository.findById(id);
-            if (existing == null) throw new RuntimeException("User not found: " + id);
+            if (existing == null)
+                throw new RuntimeException("User not found: " + id);
 
             Map<String, Object> fields = new HashMap<>();
 
@@ -62,6 +64,11 @@ public class UserService {
             if (updates.containsKey("name") && !updates.get("name").isBlank()) {
                 fields.put("name", updates.get("name"));
                 existing.setName(updates.get("name"));
+            }
+            
+            if (updates.containsKey("githubUsername")) {
+                fields.put("githubUsername", updates.get("githubUsername"));
+                existing.setGithubUsername(updates.get("githubUsername"));
             }
 
             if (!fields.isEmpty()) {
@@ -75,8 +82,11 @@ public class UserService {
     }
 
     private void validateUser(User user) {
-        if (user == null) throw new IllegalArgumentException("User cannot be null");
-        if (user.getEmail() == null || user.getEmail().isBlank()) throw new IllegalArgumentException("Email is required");
-        if (user.getName() == null || user.getName().isBlank()) throw new IllegalArgumentException("Name is required");
+        if (user == null)
+            throw new IllegalArgumentException("User cannot be null");
+        if (user.getEmail() == null || user.getEmail().isBlank())
+            throw new IllegalArgumentException("Email is required");
+        if (user.getName() == null || user.getName().isBlank())
+            throw new IllegalArgumentException("Name is required");
     }
 }
