@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditSkillModal from "../../components/EditSkillModal";
+import GithubExplorer from "./GithubExplorer";
 
 const API = "https://talentlink-1-bbse.onrender.com/api";
 
@@ -97,6 +98,7 @@ export default function Profile() {
 
   const [editOpen, setEditOpen] = useState(false);
   const [descripcion, setDescripcion] = useState("");
+  const [githubUsername, setGithubUsername] = useState("");
   const [saving, setSaving] = useState(false);
 
   const [viewSkill, setViewSkill] = useState(null);
@@ -117,15 +119,22 @@ export default function Profile() {
     fetchTalents();
   }, [user, token]);
   useEffect(() => {
-    if (editOpen) setDescripcion(user?.descripcion || "");
+    if (editOpen && user) {
+      setDescripcion(user?.descripcion || "");
+      setGithubUsername(user?.githubUsername || "");
+    }
   }, [editOpen, user]);
 
   const handleSaveProfile = async () => {
     setSaving(true);
+
     try {
       await axios.patch(
         `${API}/users/${user.id}`,
-        { descripcion },
+        {
+          descripcion,
+          githubUsername,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -133,7 +142,11 @@ export default function Profile() {
           },
         },
       );
+
+      // actualizar UI localmente sin recargar
       user.descripcion = descripcion;
+      user.githubUsername = githubUsername;
+
       setEditOpen(false);
     } catch (err) {
       console.error(err);
@@ -309,6 +322,18 @@ export default function Profile() {
             <p className="text-right text-xs text-gray-500">
               {descripcion.length}/300
             </p>
+          </div>
+          <div className="flex flex-col gap-2 mt-4">
+            <label className="text-xs text-gray-400 uppercase">
+              GitHub Username
+            </label>
+
+            <input
+              value={githubUsername}
+              onChange={(e) => setGithubUsername(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white"
+              placeholder="ej: octocat"
+            />
           </div>
         </div>
         <div className="px-6 py-5 border-t border-white/10 flex gap-3">
