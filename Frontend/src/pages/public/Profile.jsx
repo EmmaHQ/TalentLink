@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import EditSkillModal from "../../components/EditSkillModal";
-import GithubExplorer from "./GithubExplorer";
+import GithubExplorer from "./GitHubExplorer";
 
 const API = "https://talentlink-1-bbse.onrender.com/api";
 
