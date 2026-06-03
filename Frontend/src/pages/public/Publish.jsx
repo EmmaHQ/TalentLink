@@ -144,7 +144,7 @@ export default function Publish() {
             className="
               w-full px-4 py-3 rounded-xl
               bg-white/10 border border-white/20
-              outline-none text-white placeholder-gray-500
+              outline-none text-white placeholder-gray-200
               focus:ring-2 focus:ring-yellow-400/40 transition
             "
           />
@@ -158,7 +158,7 @@ export default function Publish() {
             className="
               w-full px-4 py-3 rounded-xl
               bg-white/10 border border-white/20
-              outline-none text-white placeholder-gray-500
+              outline-none text-white placeholder-gray-200
               h-32 resize-none
               focus:ring-2 focus:ring-yellow-400/40 transition
             "
@@ -216,7 +216,7 @@ export default function Publish() {
               className="
                 w-full pl-8 pr-4 py-3 rounded-xl
                 bg-white/10 border border-white/20
-                outline-none text-white placeholder-gray-500
+                outline-none text-white placeholder-gray-200
                 focus:ring-2 focus:ring-yellow-400/40 transition
               "
             />

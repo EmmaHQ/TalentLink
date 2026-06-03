@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("token", token);
 
     // 🔥 SIEMPRE traer user real del backend
-    const res = await axios.get("http://localhost:8001/api/auth/me", {
+    const res = await axios.get("https://talentlink-1-bbse.onrender.com/api/auth/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
