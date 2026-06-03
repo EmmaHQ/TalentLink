@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 
 import Home from "../pages/public/Home";
+import GithubExplorer from "../pages/public/GitHubExplorer";
 import Explore from "../pages/public/Explore";
 import Publish from "../pages/public/Publish";
 import Login from "../pages/public/Login";
@@ -31,6 +32,8 @@ export default function AppRoutes() {
 
             {/* 👤 PERFIL PÚBLICO DE OTRO USUARIO */}
             <Route path="/profile/:userId" element={<PublicProfile />} />
+
+            <Route path="/github" element={<GithubExplorer />} />
           </Route>
         </Route>
 

@@ -271,6 +271,9 @@ export default function Profile() {
             </div>
           )}
         </div>
+        {user.githubUsername && (
+          <GithubExplorer githubUsername={user.githubUsername} />
+        )}
       </div>
 
       {/* EDIT PROFILE SLIDE-OVER */}
